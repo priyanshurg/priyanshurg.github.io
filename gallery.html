@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo Grid</title>
+  <style>
+    :root{
+      --card-size: 220px;     /* height of each photo frame */
+      --gap: 14px;
+      --radius: 14px;
+    }
+    body{
+      margin: 24px;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background:#f8fafc; color:#0f172a;
+    }
+    h1{ font-size:1.4rem; margin:0 0 12px; }
+    .gallery{
+      display:grid;
+      gap: var(--gap);
+      grid-template-columns: repeat(5, minmax(0,1fr)); /* 5 per row */
+      align-items:start;
+    }
+    /* Fall back to 4 per row on somewhat smaller screens, then 3/2/1 */
+    @media (max-width: 1400px){ .gallery{ grid-template-columns: repeat(4, minmax(0,1fr)); } }
+    @media (max-width: 980px){  .gallery{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+    @media (max-width: 680px){  .gallery{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 420px){  .gallery{ grid-template-columns: 1fr; } }
+
+    figure.card{
+      margin:0; background:#fff; border:1px solid #e5e7eb;
+      border-radius: var(--radius); overflow:hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+    }
+    .frame{
+      width:100%; height: var(--card-size); background:#e5e7eb;
+    }
+    .frame > img{
+      width:100%; height:100%; display:block;
+      object-fit: cover;        /* crop uniformly to the frame */
+      object-position: center;  /* center the crop */
+    }
+    figcaption{
+      padding:10px 12px; font-size:.95rem; line-height:1.35;
+      color:#374151; border-top:1px solid #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gallery</h1>
+  <div id="gallery" class="gallery" role="list"></div>
+
+  <script>
+    // --- Add your photos here or via addPhoto() later ---
+    // Tip: put image files in an "images/" folder next to this HTML.
+    const photos = [
+      { src: "images/photo1.jpg", caption: "Sunrise over the ridge" },
+      { src: "images/photo2.jpg", caption: "Field notes — day 12" },
+      { src: "images/photo3.jpg", caption: "River bend, HUC8-XXXX" },
+      { src: "images/photo4.jpg", caption: "Sampling site A" },
+      { src: "images/photo5.jpg", caption: "Evening light" }
+    ];
+
+    // Create one card
+    function createCard({ src, caption = "", alt = "" }) {
+      const fig = document.createElement("figure");
+      fig.className = "card";
+
+      const frame = document.createElement("div");
+      frame.className = "frame";
+
+      const img = document.createElement("img");
+      img.loading = "lazy";
+      img.src = src;
+      img.alt = alt || caption || "Photo";
+
+      frame.appendChild(img);
+
+      const cap = document.createElement("figcaption");
+      cap.textContent = caption;
+
+      fig.appendChild(frame);
+      fig.appendChild(cap);
+      return fig;
+    }
+
+    // Render a list of photos
+    function renderGallery(items) {
+      const root = document.getElementById("gallery");
+      root.innerHTML = "";
+      items.forEach(item => root.appendChild(createCard(item)));
+    }
+
+    // Add a single photo (also appends immediately to the DOM)
+    function addPhoto(src, caption = "", alt = "") {
+      const item = { src, caption, alt };
+      photos.push(item);
+      document.getElementById("gallery").appendChild(createCard(item));
+    }
+
+    // Initial render
+    renderGallery(photos);
+
+    // Expose helpers if you want to use them from the console or another script
+    window.addPhoto = addPhoto;
+    window.renderGallery = renderGallery;
+  </script>
+</body>
+</html>

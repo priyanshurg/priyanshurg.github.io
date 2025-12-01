@@ -1,0 +1,194 @@
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;              
+    height: 100vh;
+    background-color: #f9f9f9;
+    color: #023e8a; /* Default text color */
+  }
+
+  .sidebar {
+    background-color: #fff;
+    width: 20%;
+    padding: 40px 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  }
+
+  .content {
+    width: 80%;
+    padding: 30px 40px;
+    overflow-y: auto;
+    display: block;             
+  }
+
+  .main {
+    margin-bottom: 40px;
+  }
+
+  h2 {
+    color: #023e8a; /* Header color */
+  }
+
+  .footer {
+    font-size: 1em;
+    margin-top: 15px;
+    line-height: 1.5;
+    color: #333; /* Footer color (easy to change here) */
+  }
+
+  iframe {
+    width: 100%;
+    height: 70vh;
+    border: none;
+  }
+  .color-box {
+    display: inline-block;
+    width: 14px;      /* adjust size */
+    height: 14px;     /* adjust size */
+    margin-right: 6px;
+    border: 1px solid #ffffff;  /* optional border */
+    vertical-align: middle;  /* aligns with text */
+  }
+
+  hr {
+  border: none;
+  border-top: 2px solid #77bbff;
+  margin: 30px 0;
+}
+</style>
+
+<body>
+
+  <div class="sidebar">
+    <h1>Predicting PFAS Violations in U.S. Public Water Systems</h1>
+    <hr>
+    <p>
+      <span style="color:#333;">
+        The University of Texas at Austin
+        <br> <br>
+        <span style="display:block; margin-left:15px; color:#333;">
+        Maseeh Department of Civil, Architectural and Environmental Engineering
+        <br> <br>
+        McKetta Department of Chemical Engineering
+        </span>
+      </span>
+    </p>
+  </div>
+
+  <div class="content"> 
+
+    <div class="main">
+      <h2>What are PFAS?</h2> 
+      <div class="footer">
+        PFAS, or, per- and polyfluoroalkyl substances, are long-lasting chemicals that are widely used for consumer, commercial, and industrial purposes, with components that take a long time to break down. 
+        Their frequent application and persistence in the environment means that PFAS are found in human and animal blood, as well as in food products and in air, water, and soil.
+        <br> <br>
+        PFAS have been linked to negative health effects in humans and animals, through numerous scientific studies. Research continues on how much people, animals, and the environment are exposed to PFAS, as well as how to manage and remove these chemicals.
+        <br> <br>
+        Source: <a href="https://www.epa.gov/pfas/pfas-explained">EPA</a>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="main">
+      <h2>What is UCMR5?</h2> 
+      <div class="footer">
+        This study was conducted using data collected from UCMR5 - the Fifth Unregulated Contaminant Monitoring Rule. 
+        <br> <br>
+        Every five years, the EPA issues a list of unregulated contaminants that Public Water Systems (PWSs) should monitor. Between 2023 and 2025, data was collected on 30 chemicals, 29 being PFAS substances. This sampling enables further understanding of how frequently PFAS appear in drinking water systems.
+        <br> <br>
+        Source: <a href="https://www.epa.gov/dwucmr/fifth-unregulated-contaminant-monitoring-rule">EPA</a>
+      </div>
+    </div> 
+
+    <hr>
+
+    <div class="main">
+      <h2>What are HUCs?</h2> 
+      <div class="footer">
+        The United States Geological Survey outlines watersheds based on surface hydrologic features. The country is divided into progressively smaller areas with increasingly detailed digit codes (or, HUCs: Hydrologic Unit Codes).
+        The largest subdivision have two-digit codes, while the smallest have 12-digit codes.
+        <br> <br>
+        This study evaluates PFAS detections at the HUC8 level (subdivisions with 8 digits), as opposed to by city, county, state, or administrative subdivisions.
+        <br> <br>
+        Our model uses HUC8 regions because predicting PFAS violations based on watershed enables more accurate tracking of PFAS as they travel from industrial sites into waterways and, ultimately, public water systems.
+        <br> <br>
+        Source: <a href="hhttps://nas.er.usgs.gov/hucs.aspx">USGS</a>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="main">
+      <h2>Project Objective</h2> 
+      <div class="footer">
+        This website was created in conjunction with a paper titled "Explainable AI Reveals Statistical Associations Between Industrial Activity and PFAS Contamination of Public Water Systems," written by researchers from The University of Texas at Austin.
+        <br> <br>
+        The project aims to use machine learning to draw correlations between industrial activities, sociodemographics, and likelihood of PFAS detection in the U.S.'s public water systems. 
+        <br> <br>
+        By developing a model to predict risk of PFAS contamination in any given area, we hope to offer a tool that can help people become more aware of how PFAS can appear in the water they use every day.
+        <br> <br>
+        Read the paper <a href="https://www.kumarresearchgroup.com/publications.html">here</a>
+      </div>
+    </div> 
+
+    <hr>
+
+    <div class="main">
+      <h2>Violating vs Non-violating Public Water Systems</h2>
+      <div class="footer">
+        <strong>This map displays Public Water Systems in the U.S.</strong><br> 
+        <br>
+        <span style="color:#4fa8ff;"><strong>Blue</strong></span> indicates that a PWS <strong>did not</strong> report PFAS concentrations exceeding the maximum contaminant level (MCL) set by UCMR5.
+        <br>
+        <span style="color:#e0365a;"><strong>Red</strong></span> indicates that a PWS <strong>did</strong> report PFAS concentrations exceeding the maximum contaminant level (MCL) set by UCMR5. 
+        <br> <br>
+      </div>
+      <iframe src="zipcode_search_map_beta.html"></iframe>
+      <div class="footer">
+        <strong>Notes:</strong><br>
+        Each point represents one of 7237 PWSs in the United States.
+        <br>
+        Out of the 29 PFAS compounds specified by UCMR5, this study only targeted the dectection of 8.
+        <br>
+        PWSs in Alaska, Hawaii, and U.S. teritories were excluded due to differing geographical context, removing 131 PWSs from the dataset.
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="main">
+      <h2>Predicting PFAS Violation in Public Water Systems</h2>
+      <div class="footer">
+        <strong>This map displays HUC8 regions in the U.S.</strong><br> 
+        <br>
+        The color scale represents probabilities that a HUC8 region will contain at least one PWS that reports violating PFAS levels.
+        <br>
+        <span class="color-box" style="background:#4fa8ff;"></span>: <strong>unlikely</strong>
+        <br>
+        <span class="color-box" style="background:#89d8ac;"></span>: <strong>moderately likely</strong>
+        <br>
+        <span class="color-box" style="background:#efe59e;"></span>: <strong> likely</strong>
+        <br>
+        <span class="color-box" style="background:#e19c9e;"></span>: <strong>very likely</strong> 
+        <br>
+        <span class="color-box" style="background:#e0365a;"></span>: <strong>almost certain</strong> 
+        <br> <br>
+      </div>
+      <iframe src="ri_zcta_map.html"></iframe>
+      <div class="footer">
+        <strong>Notes:</strong><br>
+        Predictions were made based on the confidence of a Random Forest Classifier Model.
+        <br>
+        The model found patterns based on a PWS's violating/non-violating report and its proximity to certain types of industries.
+        <br>
+        Using on these patterns, the model made predictions of how likely an area is to contain at least 1 PWS that reports violating PFAS levels. 
+      </div>
+      <p style="font-size: 0.85em; color: #666; margin-top: 40px;"> <sup>1</sup> This map was inspired by the PFAS interactive map developed by the Sunderland Lab (<a href="https://sunderlandlab.github.io/pfas_interactive_maps/PFAS_EJ_interactive_map.html" target="_blank">Liddie et al., 2023</a>), which visualized PFAS monitoring data across U.S. states. Our version incorporates additional data and distinct features. </p>
+    </div>
+
+  </div>
+
+</body>
